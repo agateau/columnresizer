@@ -29,8 +29,7 @@ Window::Window()
 
     QtSizeGroup* sizeGroup = new QtSizeGroup(this);
     sizeGroup->addWidget(label1);
-    sizeGroup->addWidget(label2);
-    sizeGroup->addWidget(m_adjustableLabel);
+    sizeGroup->addWidgetsFromLayout(layout2, 0);
 
     connect(m_spinBox, SIGNAL(valueChanged(int)), SLOT(updateAdjustableLabel()));
     updateAdjustableLabel();

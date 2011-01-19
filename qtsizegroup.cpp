@@ -1,7 +1,11 @@
 #include <qtsizegroup.h>
 
+#include <QDebug>
+#include <QEvent>
+#include <QFormLayout>
+#include <QGridLayout>
 #include <QTimer>
-#include <QtGui>
+#include <QWidget>
 
 QtSizeGroup::QtSizeGroup(QObject* parent)
 : QObject(parent)
@@ -31,6 +35,32 @@ bool QtSizeGroup::eventFilter(QObject*, QEvent* event)
         updateWidth();
     }
     return false;
+}
+
+void QtSizeGroup::addWidgetsFromLayout(QLayout* layout, int column)
+{
+    Q_ASSERT(column >= 0);
+    QGridLayout* grid = qobject_cast<QGridLayout*>(layout);
+    QFormLayout* form = qobject_cast<QFormLayout*>(layout);
+    if (grid) {
+    } else if (form) {
+        if (column > QFormLayout::SpanningRole) {
+            qCritical() << "column should not be more than" << QFormLayout::SpanningRole << "for QFormLayout";
+            return;
+        }
+        QFormLayout::ItemRole role = static_cast<QFormLayout::ItemRole>(column);
+        for (int row = 0; row < form->rowCount(); ++row) {
+            QLayoutItem* item = form->itemAt(row, role);
+            QWidget* widget = item->widget();
+            if (widget) {
+                addWidget(widget);
+            } else {
+                qWarning() << "Not handling content of row" << row + 1 << ": layout item is not a widget";
+            }
+        }
+    } else {
+        qCritical() << "Don't know how to handle layout" << layout;
+    }
 }
 
 #include <qtsizegroup.moc>

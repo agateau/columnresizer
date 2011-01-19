@@ -5,6 +5,7 @@
 #include <QtCore/QList>
 
 class QEvent;
+class QLayout;
 class QWidget;
 
 class QtSizeGroup : public QObject
@@ -14,6 +15,7 @@ public:
     QtSizeGroup(QObject* parent = 0);
 
     void addWidget(QWidget* widget);
+    void addWidgetsFromLayout(QLayout*, int column);
 
 public Q_SLOTS:
     void updateWidth();
