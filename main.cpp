@@ -1,5 +1,5 @@
 #include <QApplication>
-#include <qtsizegroup.h>
+#include <widgetresizer.h>
 
 #include <QtGui>
 
@@ -27,7 +27,7 @@ Window::Window()
     layout->addWidget(groupBox2);
     layout->addStretch();
 
-    QtSizeGroup* sizeGroup = new QtSizeGroup(this);
+    WidgetResizer* sizeGroup = new WidgetResizer(this);
     sizeGroup->addWidget(label1);
     sizeGroup->addWidgetsFromLayout(layout2, 0);
 

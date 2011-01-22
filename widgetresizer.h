@@ -1,5 +1,5 @@
-#ifndef QTSIZEGROUP_H
-#define QTSIZEGROUP_H
+#ifndef WIDGETRESIZER_H
+#define WIDGETRESIZER_H
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
@@ -8,11 +8,11 @@ class QEvent;
 class QLayout;
 class QWidget;
 
-class QtSizeGroup : public QObject
+class WidgetResizer : public QObject
 {
     Q_OBJECT
 public:
-    QtSizeGroup(QObject* parent = 0);
+    WidgetResizer(QObject* parent = 0);
 
     void addWidget(QWidget* widget);
     void addWidgetsFromLayout(QLayout*, int column);
@@ -27,4 +27,4 @@ private:
     QList<QWidget*> m_widgets;
 };
 
-#endif /* QTSIZEGROUP_H */
+#endif /* WIDGETRESIZER_H */

@@ -4,9 +4,9 @@ cmake_minimum_required(VERSION 2.8)
 find_package(Qt4 REQUIRED)
 
 # Sources
-set(qtsizegroupdemo_SRCS
+set(widgetresizerdemo_SRCS
     main.cpp
-    qtsizegroup.cpp
+    widgetresizer.cpp
     )
 
 # Building
@@ -18,15 +18,15 @@ include_directories(
     ${QT_QTGUI_INCLUDE_DIR}
     )
 
-qt4_automoc(${qtsizegroupdemo_SRCS})
-add_executable(qtsizegroupdemo ${qtsizegroupdemo_SRCS})
+qt4_automoc(${widgetresizerdemo_SRCS})
+add_executable(widgetresizerdemo ${widgetresizerdemo_SRCS})
 
-target_link_libraries(qtsizegroupdemo
+target_link_libraries(widgetresizerdemo
     ${QT_QTGUI_LIBRARIES}
     ${QT_QTCORE_LIBRARIES}
     )
 
 # Install
-install(TARGETS qtsizegroupdemo
+install(TARGETS widgetresizerdemo
     RUNTIME DESTINATION bin
     )

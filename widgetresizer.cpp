@@ -1,4 +1,4 @@
-#include <qtsizegroup.h>
+#include <widgetresizer.h>
 
 #include <QDebug>
 #include <QEvent>
@@ -7,18 +7,18 @@
 #include <QTimer>
 #include <QWidget>
 
-QtSizeGroup::QtSizeGroup(QObject* parent)
+WidgetResizer::WidgetResizer(QObject* parent)
 : QObject(parent)
 {}
 
-void QtSizeGroup::addWidget(QWidget* widget)
+void WidgetResizer::addWidget(QWidget* widget)
 {
     m_widgets.append(widget);
     widget->installEventFilter(this);
     QTimer::singleShot(0, this, SLOT(updateWidth()));
 }
 
-void QtSizeGroup::updateWidth()
+void WidgetResizer::updateWidth()
 {
     int width = 0;
     Q_FOREACH(QWidget* widget, m_widgets) {
@@ -29,7 +29,7 @@ void QtSizeGroup::updateWidth()
     }
 }
 
-bool QtSizeGroup::eventFilter(QObject*, QEvent* event)
+bool WidgetResizer::eventFilter(QObject*, QEvent* event)
 {
     if (event->type() == QEvent::Resize) {
         updateWidth();
@@ -37,7 +37,7 @@ bool QtSizeGroup::eventFilter(QObject*, QEvent* event)
     return false;
 }
 
-void QtSizeGroup::addWidgetsFromLayout(QLayout* layout, int column)
+void WidgetResizer::addWidgetsFromLayout(QLayout* layout, int column)
 {
     Q_ASSERT(column >= 0);
     QGridLayout* grid = qobject_cast<QGridLayout*>(layout);
@@ -63,5 +63,5 @@ void QtSizeGroup::addWidgetsFromLayout(QLayout* layout, int column)
     }
 }
 
-#include <qtsizegroup.moc>
+#include <widgetresizer.moc>
 // vi: ts=4 sw=4 et
