@@ -11,13 +11,24 @@
 #include <QTimer>
 #include <QWidget>
 
+struct WidgetResizerPrivate
+{
+    QList<QWidget*> m_widgets;
+};
+
 WidgetResizer::WidgetResizer(QObject* parent)
 : QObject(parent)
+, d(new WidgetResizerPrivate)
 {}
+
+WidgetResizer::~WidgetResizer()
+{
+    delete d;
+}
 
 void WidgetResizer::addWidget(QWidget* widget)
 {
-    m_widgets.append(widget);
+    d->m_widgets.append(widget);
     widget->installEventFilter(this);
     QTimer::singleShot(0, this, SLOT(updateWidth()));
 }
@@ -25,10 +36,10 @@ void WidgetResizer::addWidget(QWidget* widget)
 void WidgetResizer::updateWidth()
 {
     int width = 0;
-    Q_FOREACH(QWidget* widget, m_widgets) {
+    Q_FOREACH(QWidget* widget, d->m_widgets) {
         width = qMax(widget->sizeHint().width(), width);
     }
-    Q_FOREACH(QWidget* widget, m_widgets) {
+    Q_FOREACH(QWidget* widget, d->m_widgets) {
         widget->setMinimumWidth(width);
     }
 }

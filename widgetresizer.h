@@ -12,11 +12,13 @@ class QEvent;
 class QLayout;
 class QWidget;
 
+struct WidgetResizerPrivate;
 class WidgetResizer : public QObject
 {
     Q_OBJECT
 public:
     WidgetResizer(QObject* parent = 0);
+    ~WidgetResizer();
 
     void addWidget(QWidget* widget);
     void addWidgetsFromLayout(QLayout*, int column);
@@ -28,7 +30,7 @@ protected:
     bool eventFilter(QObject*, QEvent* event);
 
 private:
-    QList<QWidget*> m_widgets;
+    WidgetResizerPrivate* const d;
 };
 
 #endif /* WIDGETRESIZER_H */
