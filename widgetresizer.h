@@ -1,3 +1,7 @@
+/*
+ * Copyright 2011 Aurélien Gâteau <agateau@kde.org>
+ * License: LGPL v2.1 or later (see COPYING)
+ */
 #ifndef WIDGETRESIZER_H
 #define WIDGETRESIZER_H
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright 2011 Aurélien Gâteau <agateau@kde.org>
+ * License: LGPL v2.1 or later (see COPYING)
+ */
 #include <QApplication>
 #include <widgetresizer.h>
 
