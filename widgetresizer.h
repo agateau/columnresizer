@@ -5,10 +5,13 @@
 #ifndef WIDGETRESIZER_H
 #define WIDGETRESIZER_H
 
+#include <QtGui/QFormLayout>
+
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
 class QEvent;
+class QGridLayout;
 class QLayout;
 class QWidget;
 
@@ -22,6 +25,8 @@ public:
 
     void addWidget(QWidget* widget);
     void addWidgetsFromLayout(QLayout*, int column);
+    void addWidgetsFromGridLayout(QGridLayout*, int column);
+    void addWidgetsFromFormLayout(QFormLayout*, QFormLayout::ItemRole role);
 
 public Q_SLOTS:
     void updateWidth();
