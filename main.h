@@ -5,6 +5,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+class Ui_DemoWidget;
+
 class Window : public QWidget
 {
     Q_OBJECT
@@ -15,8 +17,7 @@ public Q_SLOTS:
     void updateAdjustableLabel();
 
 private:
-    QSpinBox* m_spinBox;
-    QLabel* m_adjustableLabel;
+    Ui_DemoWidget* m_ui;
 };
 
 #endif /* MAIN_H */
