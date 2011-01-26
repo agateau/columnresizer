@@ -14,10 +14,11 @@
 class WRWidgetItem : public QWidgetItem
 {
 public:
-    WRWidgetItem(QWidget* widget, QFormLayout* formLayout)
+    WRWidgetItem(QWidget* widget, QFormLayout* formLayout, QFormLayout::ItemRole itemRole)
     : QWidgetItem(widget)
     , m_width(-1)
     , m_formLayout(formLayout)
+    , m_itemRole(itemRole)
     {}
 
     QSize sizeHint() const
@@ -59,7 +60,9 @@ public:
     {
         QRect rect = _rect;
         int width = widget()->sizeHint().width();
-        rect.setLeft(rect.right() - width);
+        if (m_itemRole == QFormLayout::LabelRole && m_formLayout->labelAlignment() & Qt::AlignRight) {
+            rect.setLeft(rect.right() - width);
+        }
         QWidgetItem::setGeometry(rect);
     }
 
@@ -71,6 +74,7 @@ public:
 private:
     int m_width;
     QFormLayout* m_formLayout;
+    QFormLayout::ItemRole m_itemRole;
 };
 
 typedef QPair<QGridLayout*, int> GridColumnInfo;
@@ -172,7 +176,7 @@ void WidgetResizer::addWidgetsFromFormLayout(QFormLayout* layout, QFormLayout::I
         }
         layout->removeItem(item);
         delete item;
-        WRWidgetItem* wrWidgetItem = new WRWidgetItem(widget, layout);
+        WRWidgetItem* wrWidgetItem = new WRWidgetItem(widget, layout, role);
         layout->setItem(row, role, wrWidgetItem);
         addWidget(widget);
         d->m_wrWidgetItemList << wrWidgetItem;

@@ -20,6 +20,12 @@ Window::Window()
     sizeGroup->addWidgetsFromLayout(m_ui->gridGroupBox->layout(), 0);
     sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox1->layout(), 0);
     sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox2->layout(), 0);
+
+    sizeGroup = new WidgetResizer(this);
+    sizeGroup->addWidgetsFromLayout(m_ui->gridGroupBox->layout(), 1);
+    sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox1->layout(), 1);
+    sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox2->layout(), 1);
+
     /*
     WidgetResizer* sizeGroup = new WidgetResizer(this);
     sizeGroup->addWidgetsFromLayout(layout1, 0);
