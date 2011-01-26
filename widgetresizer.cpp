@@ -150,7 +150,6 @@ void WidgetResizer::addWidgetsFromGridLayout(QGridLayout* layout, int column)
     for (int row = 0; row < layout->rowCount(); ++row) {
         QLayoutItem* item = layout->itemAtPosition(row, column);
         if (!item) {
-            qDebug() << "No item at row" << row << "column" << column;
             continue;
         }
         QWidget* widget = item->widget();
@@ -167,7 +166,6 @@ void WidgetResizer::addWidgetsFromFormLayout(QFormLayout* layout, QFormLayout::I
     for (int row = 0; row < layout->rowCount(); ++row) {
         QLayoutItem* item = layout->itemAt(row, role);
         if (!item) {
-            qDebug() << "No item at row" << row << "role" << role;
             continue;
         }
         QWidget* widget = item->widget();
