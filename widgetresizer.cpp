@@ -26,7 +26,6 @@ public:
         if (m_width != -1) {
             size.setWidth(m_width);
         }
-        qDebug() << __FUNCTION__ << size;
         return size;
     }
 
@@ -36,7 +35,6 @@ public:
         if (m_width != -1) {
             size.setWidth(m_width);
         }
-        qDebug() << __FUNCTION__ << size;
         return size;
     }
 
@@ -46,13 +44,11 @@ public:
         if (m_width != -1) {
             size.setWidth(m_width);
         }
-        qDebug() << __FUNCTION__ << size;
         return size;
     }
 
     void setFixedWidth(int width)
     {
-        qDebug() << width;
         if (width != m_width) {
             m_width = width;
             invalidate();
