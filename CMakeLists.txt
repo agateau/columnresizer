@@ -5,13 +5,14 @@ find_package(Qt4 REQUIRED)
 
 # Sources
 set(columnresizerdemo_SRCS
-    main.cpp
-    columnresizer.cpp
+    demo/main.cpp
+    src/columnresizer.cpp
     )
 
 # Building
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/demo
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_BINARY_DIR}
     ${QT_INCLUDE_DIR}
     ${QT_QTCORE_INCLUDE_DIR}
@@ -19,7 +20,7 @@ include_directories(
     )
 
 qt4_wrap_ui(columnresizerdemo_UI_SRCS
-    demowidget.ui
+    demo/demowidget.ui
     )
 qt4_automoc(${columnresizerdemo_SRCS})
 add_executable(columnresizerdemo ${columnresizerdemo_SRCS} ${columnresizerdemo_UI_SRCS})
