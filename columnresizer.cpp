@@ -2,7 +2,7 @@
  * Copyright 2011 Aurélien Gâteau <agateau@kde.org>
  * License: LGPL v2.1 or later (see COPYING)
  */
-#include <widgetresizer.h>
+#include <columnresizer.h>
 
 #include <QDebug>
 #include <QEvent>
@@ -79,31 +79,31 @@ private:
 
 typedef QPair<QGridLayout*, int> GridColumnInfo;
 
-struct WidgetResizerPrivate
+struct ColumnResizerPrivate
 {
     QList<QWidget*> m_widgets;
     QList<WRWidgetItem*> m_wrWidgetItemList;
     QList<GridColumnInfo> m_gridColumnInfoList;
 };
 
-WidgetResizer::WidgetResizer(QObject* parent)
+ColumnResizer::ColumnResizer(QObject* parent)
 : QObject(parent)
-, d(new WidgetResizerPrivate)
+, d(new ColumnResizerPrivate)
 {}
 
-WidgetResizer::~WidgetResizer()
+ColumnResizer::~ColumnResizer()
 {
     delete d;
 }
 
-void WidgetResizer::addWidget(QWidget* widget)
+void ColumnResizer::addWidget(QWidget* widget)
 {
     d->m_widgets.append(widget);
     widget->installEventFilter(this);
     QTimer::singleShot(0, this, SLOT(updateWidth()));
 }
 
-void WidgetResizer::updateWidth()
+void ColumnResizer::updateWidth()
 {
     int width = 0;
     Q_FOREACH(QWidget* widget, d->m_widgets) {
@@ -118,7 +118,7 @@ void WidgetResizer::updateWidth()
     }
 }
 
-bool WidgetResizer::eventFilter(QObject*, QEvent* event)
+bool ColumnResizer::eventFilter(QObject*, QEvent* event)
 {
     if (event->type() == QEvent::Resize) {
         updateWidth();
@@ -126,7 +126,7 @@ bool WidgetResizer::eventFilter(QObject*, QEvent* event)
     return false;
 }
 
-void WidgetResizer::addWidgetsFromLayout(QLayout* layout, int column)
+void ColumnResizer::addWidgetsFromLayout(QLayout* layout, int column)
 {
     Q_ASSERT(column >= 0);
     QGridLayout* gridLayout = qobject_cast<QGridLayout*>(layout);
@@ -145,7 +145,7 @@ void WidgetResizer::addWidgetsFromLayout(QLayout* layout, int column)
     }
 }
 
-void WidgetResizer::addWidgetsFromGridLayout(QGridLayout* layout, int column)
+void ColumnResizer::addWidgetsFromGridLayout(QGridLayout* layout, int column)
 {
     for (int row = 0; row < layout->rowCount(); ++row) {
         QLayoutItem* item = layout->itemAtPosition(row, column);
@@ -161,7 +161,7 @@ void WidgetResizer::addWidgetsFromGridLayout(QGridLayout* layout, int column)
     d->m_gridColumnInfoList << GridColumnInfo(layout, column);
 }
 
-void WidgetResizer::addWidgetsFromFormLayout(QFormLayout* layout, QFormLayout::ItemRole role)
+void ColumnResizer::addWidgetsFromFormLayout(QFormLayout* layout, QFormLayout::ItemRole role)
 {
     for (int row = 0; row < layout->rowCount(); ++row) {
         QLayoutItem* item = layout->itemAt(row, role);
@@ -181,5 +181,5 @@ void WidgetResizer::addWidgetsFromFormLayout(QFormLayout* layout, QFormLayout::I
     }
 }
 
-#include <widgetresizer.moc>
+#include <columnresizer.moc>
 // vi: ts=4 sw=4 et

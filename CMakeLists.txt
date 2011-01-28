@@ -4,9 +4,9 @@ cmake_minimum_required(VERSION 2.8)
 find_package(Qt4 REQUIRED)
 
 # Sources
-set(widgetresizerdemo_SRCS
+set(columnresizerdemo_SRCS
     main.cpp
-    widgetresizer.cpp
+    columnresizer.cpp
     )
 
 # Building
@@ -18,18 +18,18 @@ include_directories(
     ${QT_QTGUI_INCLUDE_DIR}
     )
 
-qt4_wrap_ui(widgetresizerdemo_UI_SRCS
+qt4_wrap_ui(columnresizerdemo_UI_SRCS
     demowidget.ui
     )
-qt4_automoc(${widgetresizerdemo_SRCS})
-add_executable(widgetresizerdemo ${widgetresizerdemo_SRCS} ${widgetresizerdemo_UI_SRCS})
+qt4_automoc(${columnresizerdemo_SRCS})
+add_executable(columnresizerdemo ${columnresizerdemo_SRCS} ${columnresizerdemo_UI_SRCS})
 
-target_link_libraries(widgetresizerdemo
+target_link_libraries(columnresizerdemo
     ${QT_QTGUI_LIBRARIES}
     ${QT_QTCORE_LIBRARIES}
     )
 
 # Install
-install(TARGETS widgetresizerdemo
+install(TARGETS columnresizerdemo
     RUNTIME DESTINATION bin
     )

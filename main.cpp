@@ -3,7 +3,7 @@
  * License: LGPL v2.1 or later (see COPYING)
  */
 #include <QApplication>
-#include <widgetresizer.h>
+#include <columnresizer.h>
 
 #include <QtGui>
 
@@ -16,18 +16,18 @@ Window::Window()
     m_ui = new Ui_DemoWidget;
     m_ui->setupUi(this);
 
-    WidgetResizer* sizeGroup = new WidgetResizer(this);
+    ColumnResizer* sizeGroup = new ColumnResizer(this);
     sizeGroup->addWidgetsFromLayout(m_ui->gridGroupBox->layout(), 0);
     sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox1->layout(), 0);
     sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox2->layout(), 0);
 
-    sizeGroup = new WidgetResizer(this);
+    sizeGroup = new ColumnResizer(this);
     sizeGroup->addWidgetsFromLayout(m_ui->gridGroupBox->layout(), 1);
     sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox1->layout(), 1);
     sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox2->layout(), 1);
 
     /*
-    WidgetResizer* sizeGroup = new WidgetResizer(this);
+    ColumnResizer* sizeGroup = new ColumnResizer(this);
     sizeGroup->addWidgetsFromLayout(layout1, 0);
     sizeGroup->addWidgetsFromLayout(layout2, 0);
 

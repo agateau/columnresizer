@@ -2,8 +2,8 @@
  * Copyright 2011 Aurélien Gâteau <agateau@kde.org>
  * License: LGPL v2.1 or later (see COPYING)
  */
-#ifndef WIDGETRESIZER_H
-#define WIDGETRESIZER_H
+#ifndef COLUMNRESIZER_H
+#define COLUMNRESIZER_H
 
 #include <QtGui/QFormLayout>
 
@@ -15,13 +15,13 @@ class QGridLayout;
 class QLayout;
 class QWidget;
 
-struct WidgetResizerPrivate;
-class WidgetResizer : public QObject
+struct ColumnResizerPrivate;
+class ColumnResizer : public QObject
 {
     Q_OBJECT
 public:
-    WidgetResizer(QObject* parent = 0);
-    ~WidgetResizer();
+    ColumnResizer(QObject* parent = 0);
+    ~ColumnResizer();
 
     void addWidget(QWidget* widget);
     void addWidgetsFromLayout(QLayout*, int column);
@@ -35,7 +35,7 @@ protected:
     bool eventFilter(QObject*, QEvent* event);
 
 private:
-    WidgetResizerPrivate* const d;
+    ColumnResizerPrivate* const d;
 };
 
-#endif /* WIDGETRESIZER_H */
+#endif /* COLUMNRESIZER_H */
