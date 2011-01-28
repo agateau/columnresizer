@@ -48,7 +48,7 @@ public:
         return size;
     }
 
-    void setFixedWidth(int width)
+    void setWidth(int width)
     {
         if (width != m_width) {
             m_width = width;
@@ -110,7 +110,7 @@ void ColumnResizer::updateWidth()
         width = qMax(widget->sizeHint().width(), width);
     }
     Q_FOREACH(FormLayoutWidgetItem* item, d->m_wrWidgetItemList) {
-        item->setFixedWidth(width);
+        item->setWidth(width);
         item->formLayout()->update();
     }
     Q_FOREACH(GridColumnInfo info, d->m_gridColumnInfoList) {
