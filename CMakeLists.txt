@@ -5,7 +5,7 @@ find_package(Qt4 REQUIRED)
 
 # Sources
 set(columnresizerdemo_SRCS
-    demo/main.cpp
+    demo/columnresizerdemo.cpp
     src/columnresizer.cpp
     )
 

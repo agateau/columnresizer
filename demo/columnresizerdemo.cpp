@@ -7,7 +7,7 @@
 
 #include <QtGui>
 
-#include <main.h>
+#include <columnresizerdemo.h>
 
 #include <ui_demowidget.h>
 
@@ -53,4 +53,4 @@ int main(int argc, char** argv)
     return app.exec();
 }
 
-#include <main.moc>
+#include <columnresizerdemo.moc>
