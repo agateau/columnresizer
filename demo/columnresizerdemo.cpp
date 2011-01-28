@@ -16,33 +16,21 @@ Window::Window()
     m_ui = new Ui_DemoWidget;
     m_ui->setupUi(this);
 
-    ColumnResizer* sizeGroup = new ColumnResizer(this);
-    sizeGroup->addWidgetsFromLayout(m_ui->gridGroupBox->layout(), 0);
-    sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox1->layout(), 0);
-    sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox2->layout(), 0);
+    ColumnResizer* resizer = new ColumnResizer(this);
+    resizer->addWidgetsFromLayout(m_ui->gridGroupBox1->layout(), 0);
+    resizer->addWidgetsFromLayout(m_ui->formGroupBox1->layout(), 0);
+    resizer->addWidgetsFromLayout(m_ui->formGroupBox2->layout(), 0);
+    resizer->addWidgetsFromLayout(m_ui->gridGroupBox2->layout(), 0);
 
-    sizeGroup = new ColumnResizer(this);
-    sizeGroup->addWidgetsFromLayout(m_ui->gridGroupBox->layout(), 1);
-    sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox1->layout(), 1);
-    sizeGroup->addWidgetsFromLayout(m_ui->formGroupBox2->layout(), 1);
-
-    /*
-    ColumnResizer* sizeGroup = new ColumnResizer(this);
-    sizeGroup->addWidgetsFromLayout(layout1, 0);
-    sizeGroup->addWidgetsFromLayout(layout2, 0);
-
-    connect(m_spinBox, SIGNAL(valueChanged(int)), SLOT(updateAdjustableLabel()));
+    connect(m_ui->spinBox, SIGNAL(valueChanged(int)), SLOT(updateAdjustableLabel()));
     updateAdjustableLabel();
-    */
 }
 
 void Window::updateAdjustableLabel()
 {
-    /*
     QString txt;
-    txt.fill('#', m_spinBox->value());
-    m_adjustableLabel->setText(txt + ':');
-    */
+    txt.fill('#', m_ui->spinBox->value());
+    m_ui->adjustableLabel->setText("Spin me" + txt + ':');
 }
 
 int main(int argc, char** argv)
