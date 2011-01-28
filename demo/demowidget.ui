@@ -174,7 +174,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Push Me</string>
+         <string>PushButton</string>
         </property>
        </widget>
       </item>
