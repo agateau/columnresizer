@@ -11,10 +11,10 @@
 #include <QTimer>
 #include <QWidget>
 
-class WRWidgetItem : public QWidgetItem
+class FormLayoutWidgetItem : public QWidgetItem
 {
 public:
-    WRWidgetItem(QWidget* widget, QFormLayout* formLayout, QFormLayout::ItemRole itemRole)
+    FormLayoutWidgetItem(QWidget* widget, QFormLayout* formLayout, QFormLayout::ItemRole itemRole)
     : QWidgetItem(widget)
     , m_width(-1)
     , m_formLayout(formLayout)
@@ -82,7 +82,7 @@ typedef QPair<QGridLayout*, int> GridColumnInfo;
 struct ColumnResizerPrivate
 {
     QList<QWidget*> m_widgets;
-    QList<WRWidgetItem*> m_wrWidgetItemList;
+    QList<FormLayoutWidgetItem*> m_wrWidgetItemList;
     QList<GridColumnInfo> m_gridColumnInfoList;
 };
 
@@ -109,7 +109,7 @@ void ColumnResizer::updateWidth()
     Q_FOREACH(QWidget* widget, d->m_widgets) {
         width = qMax(widget->sizeHint().width(), width);
     }
-    Q_FOREACH(WRWidgetItem* item, d->m_wrWidgetItemList) {
+    Q_FOREACH(FormLayoutWidgetItem* item, d->m_wrWidgetItemList) {
         item->setFixedWidth(width);
         item->formLayout()->update();
     }
@@ -174,10 +174,10 @@ void ColumnResizer::addWidgetsFromFormLayout(QFormLayout* layout, QFormLayout::I
         }
         layout->removeItem(item);
         delete item;
-        WRWidgetItem* wrWidgetItem = new WRWidgetItem(widget, layout, role);
-        layout->setItem(row, role, wrWidgetItem);
+        FormLayoutWidgetItem* newItem = new FormLayoutWidgetItem(widget, layout, role);
+        layout->setItem(row, role, newItem);
         addWidget(widget);
-        d->m_wrWidgetItemList << wrWidgetItem;
+        d->m_wrWidgetItemList << newItem;
     }
 }
 
