@@ -79,8 +79,25 @@ private:
 
 typedef QPair<QGridLayout*, int> GridColumnInfo;
 
-struct ColumnResizerPrivate
+class ColumnResizerPrivate
 {
+public:
+    ColumnResizerPrivate(ColumnResizer* q_ptr)
+    : q(q_ptr)
+    , m_updateTimer(new QTimer(q))
+    {
+        m_updateTimer->setSingleShot(true);
+        m_updateTimer->setInterval(0);
+        QObject::connect(m_updateTimer, SIGNAL(timeout()), q, SLOT(updateWidth()));
+    }
+
+    void scheduleWidthUpdate()
+    {
+        m_updateTimer->start();
+    }
+
+    ColumnResizer* q;
+    QTimer* m_updateTimer;
     QList<QWidget*> m_widgets;
     QList<FormLayoutWidgetItem*> m_wrWidgetItemList;
     QList<GridColumnInfo> m_gridColumnInfoList;
@@ -88,7 +105,7 @@ struct ColumnResizerPrivate
 
 ColumnResizer::ColumnResizer(QObject* parent)
 : QObject(parent)
-, d(new ColumnResizerPrivate)
+, d(new ColumnResizerPrivate(this))
 {}
 
 ColumnResizer::~ColumnResizer()
@@ -100,7 +117,7 @@ void ColumnResizer::addWidget(QWidget* widget)
 {
     d->m_widgets.append(widget);
     widget->installEventFilter(this);
-    QTimer::singleShot(0, this, SLOT(updateWidth()));
+    d->scheduleWidthUpdate();
 }
 
 void ColumnResizer::updateWidth()
@@ -121,7 +138,7 @@ void ColumnResizer::updateWidth()
 bool ColumnResizer::eventFilter(QObject*, QEvent* event)
 {
     if (event->type() == QEvent::Resize) {
-        updateWidth();
+        d->scheduleWidthUpdate();
     }
     return false;
 }
