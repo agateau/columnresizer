@@ -1,6 +1,6 @@
 /*
  * Copyright 2011 Aurélien Gâteau <agateau@kde.org>
- * License: LGPL v2.1 or later (see COPYING)
+ * License: BSD-3-Clause
  */
 #ifndef COLUMNRESIZER_H
 #define COLUMNRESIZER_H
